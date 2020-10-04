@@ -1,0 +1,47 @@
+<HTML>
+<Head>
+<div>    
+    <h2>All Appointments</h2>    
+    <table border="1" cellpadding="0" cellspacing="0" id="appointments">  	
+        <tr>    
+            <th>Member Name</th>    
+            <th>Member ID</th>    
+            <th>ScheduledDate</th> 
+			<th>Gender</th>
+			<th>DOB</th> 
+        </tr>    
+    </table>      	
+<div>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script>  
+    $(document).ready(function () {  
+		
+        // Send an AJAX request  
+        $.ajax({  
+            url: 'https://localhost:44379/api/appointment?type=json',  
+            type: "GET",  
+            data: {},  
+            dataType: "json",  
+            success: function (result) {  
+                // On success, 'data' contains a list of appointments.  
+                var htmlContent = "";  
+  
+                $.each(result, function (key, item) {  
+                    htmlContent = htmlContent + "<tr><td>" + item.MemberName + "</td><td>" + item.MemberID + "</td><td>" + item.ScheduledDate + "</td><td>" + item.Gender + "</td><td>" + item.MemberDOB + "</td></tr>";  
+                });  
+  
+                // Appending HTML content  
+                $('#appointments').append(htmlContent);  
+            },  
+            error: function (err) {  
+                alert(err.statusText);  
+            }  
+        });  
+    });  
+    
+</script> 
+</Head>
+<Body>
+
+</Body>    
+</HTML>
